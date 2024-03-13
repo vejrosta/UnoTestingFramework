@@ -1,18 +1,30 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+namespace uno
+{
+  int add(int a, int b)
+  {
+    return a + b;
+  }
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  int subtract(int a, int b)
+  {
+    return a - b;
+  }
+} // namespace uno
+
+void setup()
+{
+  // Initialize serial communication for debugging
+  // Serial.begin(9600);
+  // while (!Serial)
+  // {
+  //   ; // Wait for serial port to connect
+  // }
+  // Serial.println("Initialization complete.");
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void loop()
+{
+  // Empty loop, not used in this example
 }

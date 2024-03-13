@@ -1,23 +1,34 @@
-#define DOCTEST_CONFIG_IMPLEMENT // REQUIRED: Enable custom main()
-#include <doctest.h>
+#include <Arduino.h>
+#include <unity.h>
+#include "main.cpp" // Include the main file to test its functions
 
-TEST_CASE("Simple addition test")
+namespace uno
 {
-    int result = 1 + 1;
-    CHECK(result == 2);
-}
+    namespace test
+    {
+        namespace unity
+        {
 
-int main(int argc, char **argv)
-{
-    doctest::Context context;
+            void test_addition()
+            {
+                TEST_ASSERT_EQUAL_INT(3, add(1, 2));
+            }
 
-    // BEGIN:: PLATFORMIO REQUIRED OPTIONS
-    context.setOption("success", true);     // Report successful tests
-    context.setOption("no-exitcode", true); // Do not return non-zero code on failed test case
-    // END:: PLATFORMIO REQUIRED OPTIONS
+            void test_subtraction()
+            {
+                TEST_ASSERT_EQUAL_INT(1, subtract(3, 2));
+            }
 
-    // YOUR CUSTOM DOCTEST OPTIONS
+            int main()
+            {
+                delay(2000);   // Delay to allow serial connection to be established
+                UNITY_BEGIN(); // Begin Unity testing framework
+                RUN_TEST(test_addition);
+                RUN_TEST(test_subtraction);
+                UNITY_END(); // End Unity testing framework
+                return 0;
+            }
 
-    context.applyCommandLine(argc, argv);
-    return context.run();
-}
+        } // namespace unity
+    }     // namespace test
+} // namespace uno
